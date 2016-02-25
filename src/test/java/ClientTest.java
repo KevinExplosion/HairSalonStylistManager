@@ -9,6 +9,20 @@ public class ClientTest {
 
   @Test
   public void all_emptyAtFirst() {
-    assertEquals(Clients.all().size(), 0);
+    assertEquals(Client.all().size(), 0);
+  }
+
+  @Test
+  public void equals_returnsTrueIfLastNamesAreTheSame() {
+    Client firstClient = new Client("Public", "Jane");
+    Client secondClient = new Client("Public", "Jane");
+    assertTrue(firstClient.equals(secondClient));
+  }
+
+  @Test
+  public void save_returnsTrueIfLastNamesAreTheSame() {
+    Client myClient = new Client("Doe", "Jane");
+    myClient.save();
+    assertTrue(Client.all().get(0).equals(myClient));
   }
 }

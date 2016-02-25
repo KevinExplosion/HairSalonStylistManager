@@ -22,9 +22,19 @@ public class Client {
   }
 
   //Constructor (String/int/bool/etc. arguments)
-  public Clients(String last_name, String first_name) {
+  public Client(String last_name, String first_name) {
     this.last_name = last_name;
     this.first_name = first_name;
+  }
+
+  @Override
+  public boolean equals(Object otherClient) {
+    if(!(otherClient instanceof Client)) {
+      return false;
+    } else {
+      Client newClient = (Client) otherClient;
+      return this.getLast_name().equals(newClient.getLast_name());
+    }
   }
 
   //all method
@@ -33,6 +43,16 @@ public class Client {
     //Connection object
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Client.class);
+    }
+  }
+
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO clients (last_name, first_name) VALUES (:last_name, :first_name)";
+      con.createQuery(sql)
+        .addParameter("last_name", this.last_name)
+        .addParameter("first_name", this.first_name)
+        .executeUpdate();
     }
   }
 }
