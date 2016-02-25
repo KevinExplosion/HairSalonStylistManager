@@ -13,7 +13,7 @@ public class ClientTest {
   }
 
   @Test
-  public void equals_returnsTrueIfLastNamesAreTheSame() {
+  public void equals_returnsTrueIfFirstAndLastNamesAreTheSame() {
     Client firstClient = new Client("Public", "Jane");
     Client secondClient = new Client("Public", "Jane");
     assertTrue(firstClient.equals(secondClient));
@@ -24,5 +24,21 @@ public class ClientTest {
     Client myClient = new Client("Doe", "Jane");
     myClient.save();
     assertTrue(Client.all().get(0).equals(myClient));
+  }
+
+  @Test
+  public void save_assignsIdToObject() {
+    Client myClient = new Client("Doe", "Jane");
+    myClient.save();
+    Client savedClient = Client.all().get(0);
+    assertEquals(myClient.getId(), savedClient.getId());
+  }
+
+  @Test
+  public void find_findsClientInDatabase_true() {
+    Client myClient = new Client("Doe", "Jane");
+    myClient.save();
+    Client savedClient = Client.find(myClient.getId());
+    assertTrue(myClient.equals(savedClient));
   }
 }

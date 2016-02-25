@@ -33,7 +33,9 @@ public class Client {
       return false;
     } else {
       Client newClient = (Client) otherClient;
-      return this.getLast_name().equals(newClient.getLast_name());
+      return this.getLast_name().equals(newClient.getLast_name()) &&
+             this.getFirst_name().equals(newClient.getFirst_name()) &&
+             this.getId() == newClient.getId();
     }
   }
 
@@ -49,10 +51,21 @@ public class Client {
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO clients (last_name, first_name) VALUES (:last_name, :first_name)";
-      con.createQuery(sql)
+      this.id = (int) con.createQuery(sql, true)
         .addParameter("last_name", this.last_name)
         .addParameter("first_name", this.first_name)
-        .executeUpdate();
+        .executeUpdate()
+        .getKey();
+    }
+  }
+
+  public static Client find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM Clients where id=:id";
+      Client client = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Client.class);
+        return client;
     }
   }
 }
