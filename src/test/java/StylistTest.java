@@ -1,5 +1,6 @@
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.Arrays;
 
 public class StylistTest {
 
@@ -42,5 +43,17 @@ public class StylistTest {
     myStylist.save();
     Stylist savedStylist = Stylist.find(myStylist.getId());
     assertTrue(myStylist.equals(savedStylist));
+  }
+
+  @Test
+  public void getClients_retrievesAllClientsFromDatabase_clientsList() {
+    Stylist myStylist = new Stylist("Styles", "Julia");
+    myStylist.save();
+    Client firstClient = new Client("Doe", "Jane", myStylist.getId());
+    firstClient.save();
+    Client secondClient = new Client("Public", "Jamie", myStylist.getId());
+    secondClient.save();
+    Client[] clients = new Client[] { firstClient, secondClient };
+    assertTrue(myStylist.getClients().containsAll(Arrays.asList(clients)));
   }
 }
