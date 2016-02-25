@@ -5,26 +5,32 @@ import org.sql2o.*;
 public class Client {
   //member variables
   private int id;
-  private String last_name;
-  private String first_name;
+  private int stylistId;
+  private String lastName;
+  private String firstName;
 
   //getters
+  public int getStylistId() {
+    return stylistId;
+  }
+
   public int getId() {
     return id;
   }
 
-  public String getLast_name() {
-    return last_name;
+  public String getLastName() {
+    return lastName;
   }
 
-  public String getFirst_name() {
-    return first_name;
+  public String getFirstName() {
+    return firstName;
   }
 
   //Constructor (String/int/bool/etc. arguments)
-  public Client(String last_name, String first_name) {
-    this.last_name = last_name;
-    this.first_name = first_name;
+  public Client(String lastName, String firstName, int stylistId) {
+    this.lastName = lastName;
+    this.firstName = firstName;
+    this.stylistId = stylistId;
   }
 
   @Override
@@ -33,15 +39,16 @@ public class Client {
       return false;
     } else {
       Client newClient = (Client) otherClient;
-      return this.getLast_name().equals(newClient.getLast_name()) &&
-             this.getFirst_name().equals(newClient.getFirst_name()) &&
-             this.getId() == newClient.getId();
+      return this.getLastName().equals(newClient.getLastName()) &&
+             this.getFirstName().equals(newClient.getFirstName()) &&
+             this.getId() == newClient.getId() &&
+             this.getStylistId() == newClient.getStylistId();
     }
   }
 
   //all method
   public static List<Client> all() {
-    String sql = "SELECT id, last_name, first_name FROM clients";
+    String sql = "SELECT id, lastName, firstName, stylistId FROM clients";
     //Connection object
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Client.class);
@@ -50,10 +57,11 @@ public class Client {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO clients (last_name, first_name) VALUES (:last_name, :first_name)";
+      String sql = "INSERT INTO clients (lastName, firstName, stylistId) VALUES (:lastName, :firstName, :stylistId)";
       this.id = (int) con.createQuery(sql, true)
-        .addParameter("last_name", this.last_name)
-        .addParameter("first_name", this.first_name)
+        .addParameter("lastName", this.lastName)
+        .addParameter("firstName", this.firstName)
+        .addParameter("stylistId", this.stylistId)
         .executeUpdate()
         .getKey();
     }
@@ -61,7 +69,7 @@ public class Client {
 
   public static Client find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM Clients where id=:id";
+      String sql = "SELECT * FROM clients where id=:id";
       Client client = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Client.class);

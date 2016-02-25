@@ -5,26 +5,26 @@ import org.sql2o.*;
 public class Stylist {
   //member variables
   private int id;
-  private String last_name;
-  private String first_name;
+  private String lastName;
+  private String firstName;
 
   //getters
   public int getId() {
     return id;
   }
 
-  public String getLast_name() {
-    return last_name;
+  public String getLastName() {
+    return lastName;
   }
 
-  public String getFirst_name() {
-    return first_name;
+  public String getFirstName() {
+    return firstName;
   }
 
   //Constructor (String/int/bool/etc. arguments)
-  public Stylist(String last_name, String first_name) {
-    this.last_name = last_name;
-    this.first_name = first_name;
+  public Stylist(String lastName, String firstName) {
+    this.lastName = lastName;
+    this.firstName = firstName;
   }
 
   @Override
@@ -33,15 +33,15 @@ public class Stylist {
       return false;
     } else {
       Stylist newStylist = (Stylist) otherStylist;
-      return this.getLast_name().equals(newStylist.getLast_name()) &&
-             this.getFirst_name().equals(newStylist.getFirst_name()) &&
+      return this.getLastName().equals(newStylist.getLastName()) &&
+             this.getFirstName().equals(newStylist.getFirstName()) &&
              this.getId() == newStylist.getId();
     }
   }
 
   //all method
   public static List<Stylist> all() {
-    String sql = "SELECT id, last_name, first_name FROM stylist";
+    String sql = "SELECT id, lastName, firstName FROM stylists";
     //Connection object
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Stylist.class);
@@ -50,10 +50,10 @@ public class Stylist {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO stylist (last_name, first_name) VALUES (:last_name, :first_name)";
+      String sql = "INSERT INTO stylists (lastName, firstName) VALUES (:lastName, :firstName)";
       this.id = (int) con.createQuery(sql, true)
-        .addParameter("last_name", this.last_name)
-        .addParameter("first_name", this.first_name)
+        .addParameter("lastName", this.lastName)
+        .addParameter("firstName", this.firstName)
         .executeUpdate()
         .getKey();
     }
@@ -61,7 +61,7 @@ public class Stylist {
 
   public static Stylist find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM Stylists where id=:id";
+      String sql = "SELECT * FROM stylists where id=:id";
       Stylist stylist = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Stylist.class);
