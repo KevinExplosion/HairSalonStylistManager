@@ -20,7 +20,7 @@ stylists.vtl
 #if ($allStylists)
   <ul>
     #foreach($stylist in $allStylists)
-      <li><a href="stylists/$stylist.getId()">$stylist.lastName()</a></li>
+      <li><a href="stylists/$stylist.getId()">$stylist.getStylist()</a></li>
     #end
   </ul>
 #end
