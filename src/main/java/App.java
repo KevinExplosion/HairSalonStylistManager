@@ -11,12 +11,14 @@ public class App {
     staticFileLocation("/public");
     String layout = "templates/layout.vtl";
 
+    //working
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    //working
     get("/stylists", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       model.put("allStylists", Stylist.all());
@@ -26,10 +28,10 @@ public class App {
 
     post("/stylists", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      String stylistLastName = request.queryParams("newStylistLastName");
-      String stylistFirstName = request.queryParams("newStylistFirstName");
-      Stylist myStylist = new Stylist(stylistLastName, stylistFirstName);
-      myStylist.save();
+      String lastName = request.queryParams("stylistLastName");
+      String firstName = request.queryParams("stylistFirstName");
+      Stylist newStylist = new Stylist(lastName, firstName);
+      newStylist.save();
       model.put("allStylists", Stylist.all());
       model.put("template", "templates/stylists.vtl");
       return new ModelAndView(model, layout);
