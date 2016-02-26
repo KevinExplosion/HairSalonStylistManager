@@ -28,8 +28,8 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String stylistLastName = request.queryParams("newStylistLastName");
       String stylistFirstName = request.queryParams("newStylistFirstName");
-      Stylist newStylist = new Stylist (stylistLastName, stylistFirstName);
-      newStylist.save();
+      Stylist myStylist = new Stylist (stylistLastName, stylistFirstName);
+      myStylist.save();
       model.put("template", "templates/stylists.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
