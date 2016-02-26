@@ -1,22 +1,28 @@
 stylistClients.vtl
 
 <h3>$stylist.getLastName(), $stylist.getFirstName()</h3>
-
   <h4>Clients</h4>
-
-    <ul>
-
       #if($stylist.getClients())
+        <form action="/stylists/delete/$stylist.getId()" method="post">
 
           #foreach ($client in $stylist.getClients())
-          <li>
-            $client.getLastName(), $client.getFirstName()
-          </li>
+
+              <p>
+                $client.getLastName(), $client.getFirstName() &nbsp;
+                <input type="checkbox" name="deleteClient" value="$client.getId()" id="$client.getId()">
+              </p>
+
           #end
+
+        <br>
+      <button type="submit" class="btn btn-default" id="delete">
+        Remove Client
+      </button>
+      </form>
 
       #end
 
-    </ul>
+
 
   <div class="row">
     <div class="col-md-6">
