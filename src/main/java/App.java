@@ -30,8 +30,8 @@ public class App {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String lastName = request.queryParams("stylistLastName");
       String firstName = request.queryParams("stylistFirstName");
-      Stylist newStylist = new Stylist(lastName, firstName);
-      newStylist.save();
+      Stylist myStylist = new Stylist(lastName, firstName);
+      myStylist.save();
       model.put("allStylists", Stylist.all());
       model.put("template", "templates/stylists.vtl");
       return new ModelAndView(model, layout);
@@ -47,10 +47,11 @@ public class App {
 
     post("/stylists/:id", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
+
       int stylistId = Integer.parseInt(request.params(":id"));
-      String clientLastName = request.queryParams("newClientLastName");
-      String clientFirstName = request.queryParams("newClientFirstName");
-      Client newClient = new Client(clientLastName, clientFirstName, stylistId);
+      String lastName = request.queryParams("newClientLastName");
+      String firstName = request.queryParams("newClientFirstName");
+      Client newClient = new Client(lastName, firstName, stylistId);
       newClient.save();
       model.put("stylist", Stylist.find(stylistId));
       model.put("template", "templates/stylistClients.vtl");

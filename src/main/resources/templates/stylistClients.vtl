@@ -1,10 +1,14 @@
 stylistClients.vtl
 
-<h3>$stylist.getName()</h3>
+<h3>$stylist.getLastName(), $stylist.getFirstName()</h3>
 
   <h4>Clients</h4>
 
     #if($stylist.getClients())
+
+      #foreach ($client in $stylist.getClients())
+        $client.getLastName(), client.getFirstName()
+      #end
 
       <form action="/stylists/$stylist.getId()" method="post">
         <div class="form-group">
