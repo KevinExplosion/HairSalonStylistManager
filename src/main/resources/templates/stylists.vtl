@@ -1,19 +1,21 @@
 stylists.vtl
 <h3>Stylists</h3>
 
-<form action="/stylists" method="post">
-  <div class="form-group">
-    <label for="newStylistLastName">Last Name</label>
-    <input class="form-control" type="text" name="newStylistLastName" id="newStylistLastName">
-  </div>
-  <div class="form-group">
-    <label for="newStylistFirstName">First Name</label>
-    <input class="form-control" type="text" name="newStylistFirstName" id="newStylistFirstName">
-  </div>
-  <button type="submit" class="btn-btn-default">
-    Add Stylist
-  </button>
-</form>
+<div class="row">
+  <div class="col-md-6">
+    <form action="/stylists" method="post">
+      <div class="form-group">
+        <label for="newStylistLastName">Last Name</label>
+        <input class="form-control" type="text" name="newStylistLastName" id="newStylistLastName">
+      </div>
+      <div class="form-group">
+        <label for="newStylistFirstName">First Name</label>
+        <input class="form-control" type="text" name="newStylistFirstName" id="newStylistFirstName">
+      </div>
+      <button type="submit" class="btn-btn-default">
+        Add Stylist
+      </button>
+    </form>
 
 #if ($allStylists)
   <ul>
@@ -24,3 +26,5 @@ stylists.vtl
 #end
 
 Return to <a href="/">Main Page</a>
+</div>
+</div>
