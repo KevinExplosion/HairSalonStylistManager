@@ -32,7 +32,7 @@ public class AppTest extends FluentTest {
   public void createNewStylistLastName() {
     goTo("http://localhost:4567/");
     click("a", withText("Manage Stylists"));
-    fill("#newStylistLastName").with("Styles");
+    fill("#stylistLastName").with("Styles");
     submit(".btn");
     assertThat(pageSource()).contains("Styles");
   }
@@ -41,8 +41,19 @@ public class AppTest extends FluentTest {
   public void createNewStylistFirstName() {
     goTo("http://localhost:4567/");
     click("a", withText("Manage Stylists"));
-    fill("#newStylistFirstName").with("Julia");
+    fill("#stylistFirstName").with("Julia");
     submit(".btn");
     assertThat(pageSource()).contains("Julia");
+  }
+
+  @Test
+  public void addClientFormAddsClient() {
+    Stylist testStylist = new Stylist ("Styles", "Julia");
+    testStylist.save();
+    String stylistPath = String.format("http://localhost:4567/stylists/%d", testStylist.getId());
+    goTo(stylistPath);
+    fill("#newClientLastName").with("Poovey");
+    submit("#addClient");
+    assertThat(pageSource()).contains("Poovey");
   }
 }
