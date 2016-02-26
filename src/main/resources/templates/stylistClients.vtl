@@ -4,14 +4,22 @@ stylistClients.vtl
 
   <h4>Clients</h4>
 
-    #if($stylist.getClients())
+    <ul>
 
-      #foreach ($client in $stylist.getClients())
-        $client.getLastName(), $client.getFirstName()
+      #if($stylist.getClients())
+
+          #foreach ($client in $stylist.getClients())
+          <li>
+            $client.getLastName(), $client.getFirstName()
+          </li>
+          #end
+
       #end
 
-      #end
+    </ul>
 
+  <div class="row">
+    <div class="col-md-6">
       <form action="/stylists/$stylist.getId()" method="post">
         <div class="form-group">
           <label for="newClientLastName">Client Last Name</label>
@@ -28,3 +36,6 @@ stylistClients.vtl
       </form>
 
       <a href="/stylists">Manage Stylists</a>
+      Return to <a href="/">Main Page</a>
+</div>
+</div>
