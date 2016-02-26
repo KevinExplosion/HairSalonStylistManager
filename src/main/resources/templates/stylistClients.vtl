@@ -7,7 +7,9 @@ stylistClients.vtl
     #if($stylist.getClients())
 
       #foreach ($client in $stylist.getClients())
-        $client.getLastName(), client.getFirstName()
+        $client.getLastName(), $client.getFirstName()
+      #end
+
       #end
 
       <form action="/stylists/$stylist.getId()" method="post">
