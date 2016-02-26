@@ -29,11 +29,11 @@ public class AppTest extends FluentTest {
   }
 
   @Test
-  public void creatNewStylist() {
+  public void createNewStylist() {
     goTo("http://localhost:4567/");
-    click("a", withText("Add Stylist"));
-    fill("#newStylist").with("Styles", "Julia");
+    click("a", withText("Manage Stylists"));
+    fill("#newStylistLastName").with("Styles");
     submit(".btn");
-    assertThat(pageSource()).contains("Styles", "Julia");
+    assertThat(pageSource()).contains("Styles");
   }
 }

@@ -16,10 +16,9 @@ stylists.vtl
 </form>
 
 #if ($allStylists)
-
   <ul>
     #foreach($stylist in $allStylists)
-      <li><a href="stylists/$stylist.getId()">$stylist.getNewStylistLastName(), $stylist.getNewStylistFirstName()</a></li>
+      <li><a href="stylists/$stylist.getId()">$stylist.getNewStylist()</a></li>
     #end
   </ul>
 #end
