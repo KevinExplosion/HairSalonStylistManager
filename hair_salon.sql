@@ -35,9 +35,9 @@ SET default_with_oids = false;
 
 CREATE TABLE clients (
     id integer NOT NULL,
-    stylist_id integer,
     lastname character varying,
-    firstname character varying
+    firstname character varying,
+    stylistid integer
 );
 
 
@@ -116,7 +116,16 @@ ALTER TABLE ONLY stylists ALTER COLUMN id SET DEFAULT nextval('stylists_id_seq':
 -- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY clients (id, stylist_id, lastname, firstname) FROM stdin;
+COPY clients (id, lastname, firstname, stylistid) FROM stdin;
+2	Francois	Jean	17
+3	Cumberbatch	Geraldyne	17
+4	kombat	mortal	6
+5	fighter	street	6
+7	Garland	Judy	13
+8	Facey	Client	5
+9	McClient	Clancy	5
+10	McClient	Clancy	5
+11	Macoo	Vicki	9
 \.
 
 
@@ -124,7 +133,7 @@ COPY clients (id, stylist_id, lastname, firstname) FROM stdin;
 -- Name: clients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('clients_id_seq', 109, true);
+SELECT pg_catalog.setval('clients_id_seq', 11, true);
 
 
 --
@@ -132,6 +141,23 @@ SELECT pg_catalog.setval('clients_id_seq', 109, true);
 --
 
 COPY stylists (id, lastname, firstname) FROM stdin;
+1	\N	\N
+2	\N	\N
+3	\N	\N
+4	check	name
+5	styles	julie
+6	test	name
+7		
+8	asdf	asdf
+9	test	test
+10	test	test
+11	blah	blah
+12	blah	blah
+13	lastname	first
+14	test	test
+15	Kevin	Mattison
+16	Stylist	New
+17	Guy	Buddy
 \.
 
 
@@ -139,7 +165,7 @@ COPY stylists (id, lastname, firstname) FROM stdin;
 -- Name: stylists_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('stylists_id_seq', 89, true);
+SELECT pg_catalog.setval('stylists_id_seq', 17, true);
 
 
 --
