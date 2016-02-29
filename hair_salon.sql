@@ -70,7 +70,6 @@ ALTER SEQUENCE clients_id_seq OWNED BY clients.id;
 
 CREATE TABLE stylists (
     id integer NOT NULL,
-    stylist character varying,
     lastname character varying,
     firstname character varying
 );
@@ -132,7 +131,7 @@ SELECT pg_catalog.setval('clients_id_seq', 109, true);
 -- Data for Name: stylists; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY stylists (id, stylist, lastname, firstname) FROM stdin;
+COPY stylists (id, lastname, firstname) FROM stdin;
 \.
 
 
@@ -140,7 +139,7 @@ COPY stylists (id, stylist, lastname, firstname) FROM stdin;
 -- Name: stylists_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('stylists_id_seq', 88, true);
+SELECT pg_catalog.setval('stylists_id_seq', 89, true);
 
 
 --
