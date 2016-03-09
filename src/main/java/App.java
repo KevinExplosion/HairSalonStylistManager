@@ -24,6 +24,13 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/delete", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("allStylists", Stylist.all());
+      model.put("template", "templates/delete.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
     post("/stylists", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String lastName = request.queryParams("stylistLastName");
@@ -68,6 +75,14 @@ public class App {
       }
       model.put("stylist", Stylist.find(stylistId));
       model.put("template", "templates/stylistClients.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/stylists/:id/delete", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Stylist stylist = Stylist.find(Integer.parseInt(request.params("id")));
+      Stylist.delete();
+      model.put("template", "templates/stylists.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }
