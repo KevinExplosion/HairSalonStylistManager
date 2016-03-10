@@ -18,17 +18,11 @@
     </form>
 
 #if ($allStylists)
-  <form action="/stylists/delete" method="post">
     <ul>
       #foreach($stylist in $allStylists)
-        <li><a href="stylists/$stylist.getId()">$stylist.getLastName(), $stylist.getFirstName()</a>&nbsp;
-        <input type="checkbox" name="deleteStylist" value="$stylist.getId()" id="$stylist.getId()"></li>
+        <li><a href="stylists/$stylist.getId()">$stylist.getLastName(), $stylist.getFirstName()</a></li>
       #end
     </ul>
-    <button type="submit" class="btn btn-default" id="delete">
-      Remove Stylist
-    </button>
-  </form>
 #end
 <br>
 Return to <a href="/">Main Page</a>

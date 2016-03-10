@@ -1,5 +1,9 @@
 <div class="container formBackground">
 <h3>$stylist.getLastName(), $stylist.getFirstName()</h3>
+<form action ="/delete/stylist/:id" method ='post'>
+    <input id="stylistId" name="stylistId" type="hidden" value="$stylist.getId()">
+    <button type = 'submit'> Delete Stylist </button>
+  </form>
   <h4>Clients</h4>
       #if($stylist.getClients())
         <form action="/stylists/delete/$stylist.getId()" method="post">
